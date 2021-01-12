@@ -1,5 +1,4 @@
 from fetch_data import retrieve_ENST_seq, retrieve_ENST_overlap
-from ensembl_class import EnsemblSeq
 
 
 class SeqParser:
