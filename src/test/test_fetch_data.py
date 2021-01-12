@@ -1,7 +1,7 @@
 import unittest
 import json
 import os
-from fetch_data import retrieve_ENST_seq
+from fetch_data import retrieve_ENST_seq, retrieve_ENST_overlap
 from ensembl_class import EnsemblSeq
 
 
@@ -83,6 +83,19 @@ class TestEnsemblAPICall(unittest.TestCase):
         """Call Ensembl sequence API"""
         res = retrieve_ENST_seq(ENST_ID='ENST00000288602')
         self.assertIsInstance(res, EnsemblSeq)
+
+    def test_3_all_overlap_api(self):
+        """Call Ensembl overlap API"""
+        res = retrieve_ENST_overlap(ENST_ID='ENST00000288602')
+        cds = []
+        exons = []
+        for i in res:
+            if i.get('Parent') == 'ENST00000288602':
+                if i.get('feature_type') == 'exon':
+                    exons.append(i)
+                elif i.get('feature_type') == 'cds':
+                    cds.append(i)
+        self.assertEqual(len(exons), 19)
 
 
 if __name__ == "__main__":
