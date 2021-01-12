@@ -81,16 +81,16 @@ class TestEnsemblAPICall(unittest.TestCase):
 
     def test_1_call_api_and_format_resp(self):
         """Call Ensembl sequence API"""
-        res = retrieve_ENST_seq(ENST_ID='ENST00000288602')
+        res = retrieve_ENST_seq(ENST_ID=self.enst_id)
         self.assertIsInstance(res, EnsemblSeq)
 
     def test_3_all_overlap_api(self):
         """Call Ensembl overlap API"""
-        res = retrieve_ENST_overlap(ENST_ID='ENST00000288602')
+        res = retrieve_ENST_overlap(ENST_ID=self.enst_id)
         cds = []
         exons = []
         for i in res:
-            if i.get('Parent') == 'ENST00000288602':
+            if i.get('Parent') == self.enst_id:
                 if i.get('feature_type') == 'exon':
                     exons.append(i)
                 elif i.get('feature_type') == 'cds':
