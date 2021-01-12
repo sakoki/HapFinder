@@ -7,7 +7,7 @@ class SeqParser:
     start_codon = ['ATG']
     stop_codon = ['TAG', 'TAA', 'TGA']
 
-    def get_n_terminal_homologous_arms(self, ENST_ID: str, arm_len: int = 20):
+    def get_n_terminal_homologous_arms(self, ENST_ID: str, arm_len: int = 50):
         """Get region of cDNA that is translated
 
         Rule:
@@ -53,13 +53,14 @@ class SeqParser:
 
         if reverse:
             # right most side is where sequence starts (reverse strand)
-            left_arm = cds.get('end') - arm_len - 3 - 1, cds.get('end') - 3
-            right_arm = cds.get('end') + 1, cds.get('end') + arm_len
+            print(cds.get('end'))
+            left_arm = cds.get('end') - arm_len - 2, cds.get('end') - 3
+            right_arm = cds.get('end') - 2, cds.get('end') + arm_len - 3
             return f"{seq.chromosome}:{left_arm[0]}-{left_arm[1]}", f"{seq.chromosome}:{right_arm[0]}-{right_arm[1]}"
         else:
             # left most side is where sequence starts (forward strand)
             left_arm = cds.get('start') - arm_len, cds.get('start') - 1
-            right_arm = cds.get('start') + 3, cds.get('start') + arm_len + 3 - 1
+            right_arm = cds.get('start'), cds.get('start') + arm_len - 1
             return f"{seq.chromosome}:{left_arm[0]}-{left_arm[1]}", f"{seq.chromosome}:{right_arm[0]}-{right_arm[1]}"
 
 
