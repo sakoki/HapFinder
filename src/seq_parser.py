@@ -68,3 +68,5 @@ if __name__ == "__main__":
     print(SeqParser().get_n_terminal_homologous_arms(ENST_ID='ENST00000288602'))
     # Forward strand
     print(SeqParser().get_n_terminal_homologous_arms(ENST_ID='ENST00000413518'))
+    # print(SeqParser().get_n_terminal_homologous_arms(ENST_ID='ENST00000372213'))
+
