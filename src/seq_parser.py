@@ -53,7 +53,6 @@ class SeqParser:
 
         if reverse:
             # right most side is where sequence starts (reverse strand)
-            print(cds.get('end'))
             left_arm = cds.get('end') - arm_len - 2, cds.get('end') - 3
             right_arm = cds.get('end') - 2, cds.get('end') + arm_len - 3
             return f"{seq.chromosome}:{left_arm[0]}-{left_arm[1]}", f"{seq.chromosome}:{right_arm[0]}-{right_arm[1]}"
