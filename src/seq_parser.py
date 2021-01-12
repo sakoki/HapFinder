@@ -36,21 +36,26 @@ class SeqParser:
         # is the beginning of the sequence
         reverse = True if seq.strand == 'reverse' else False
         cds = sorted(cds, key=lambda x: x.get('start'), reverse=reverse)[0]
-        print(reverse)
-        print(seq.left_seq_pos)
-        print(seq.right_seq_pos)
-        print(cds.get('start'))
-        print(cds.get('end'))
-        start_index = abs(cds.get('start') - seq.left_seq_pos)
-        end_index = abs(cds.get('end') - seq.left_seq_pos - 1)
-        print(start_index, end_index)
-        print(seq.seq[start_index:end_index])
-        print('  ', seq.seq[start_index+3:end_index])
+        # For development
+        # print(reverse)
+        # print(seq.left_seq_pos)
+        # print(seq.right_seq_pos)
+        # print(cds.get('start'))
+        # print(cds.get('end'))
+        # if reverse:
+        #     end_index = abs(cds.get('start') - seq.right_seq_pos) - 1
+        #     start_index = abs(cds.get('end') - seq.right_seq_pos)
+        # else:
+        #     start_index = abs(cds.get('start') - seq.left_seq_pos)
+        #     end_index = abs(cds.get('end') - seq.left_seq_pos - 1)
+        # print(start_index, end_index)
+        # print(seq.seq[start_index:end_index])
+        # print('  ', seq.seq[start_index+3:end_index])
 
         if reverse:
             # right most side is where sequence starts (reverse strand)
             left_arm = cds.get('end') - arm_len - 3 - 1, cds.get('end') - 3
-            right_arm = cds.get('end') + 1, cds.get('end') + arm_len - 1
+            right_arm = cds.get('end') + 1, cds.get('end') + arm_len
             return f"{seq.chromosome}:{left_arm[0]}-{left_arm[1]}", f"{seq.chromosome}:{right_arm[0]}-{right_arm[1]}"
         else:
             # left most side is where sequence starts (forward strand)
